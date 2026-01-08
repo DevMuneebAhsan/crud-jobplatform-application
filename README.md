@@ -1,61 +1,91 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+# Pixel Positions
 
-## About Laravel
+A Laravel application using Tailwind CSS and Blade views for building responsive, component-driven UIs.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Stack
+- PHP (Laravel)
+- Blade templates (resources/views)
+- Tailwind CSS (configured via tailwind.config.js)
+- Vite (asset bundling)
+- Node / npm, Composer
+- MySQL / PostgreSQL (configurable via .env)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Quickstart (development)
+1. Clone
+    git clone <repo-url>
+2. Install dependencies
+    composer install
+    npm install
+3. Environment
+    cp .env.example .env
+    # set DB and other credentials in .env
+    php artisan key:generate
+4. Storage & DB
+    php artisan storage:link
+    php artisan migrate --seed
+5. Run dev servers
+    npm run dev
+    php artisan serve
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Access the app at http://127.0.0.1:8000 (or the host printed by artisan).
 
-## Learning Laravel
+## Build for production
+1. Build assets
+    npm run build
+2. Optimize Laravel
+    php artisan config:cache
+    php artisan route:cache
+    php artisan view:cache
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Deploy the built assets and ensure environment variables are set on the server.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## Project layout (high level)
+- app/ — backend logic, models, controllers
+- resources/views/ — Blade templates and components
+- resources/css/ — Tailwind entry (imports)
+- resources/js/ — frontend scripts
+- tailwind.config.js — Tailwind config and purge paths
+- vite.config.js — Vite configuration
+- database/migrations, database/seeders — schema and seed data
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Ensure Tailwind scans Blade views (resources/views/**/*.blade.php) in tailwind.config.js purge/content.
 
-## Laravel Sponsors
+## Common commands
+- composer install
+- npm install
+- npm run dev         # dev assets (Vite)
+- npm run build       # production assets
+- php artisan migrate
+- php artisan migrate --seed
+- php artisan tinker
+- php artisan test     # PHPUnit / Pest
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## Testing
+Use PHPUnit or Pest per project config:
+php artisan test
+or
+vendor/bin/phpunit
 
-### Premium Partners
+## Environment & troubleshooting
+- Node >= 16 recommended.
+- If migrations fail, verify DB credentials in .env.
+- Fix permissions: storage/ and bootstrap/cache must be writable.
+- Missing APP_KEY: run php artisan key:generate
+- If assets do not update, stop dev server and restart npm run dev (Vite).
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development/)**
-- **[Active Logic](https://activelogic.com)**
+## Performance & security notes
+- Never commit .env to VCS.
+- Use config:cache, route:cache, and view:cache in production.
+- Run queue workers for offloaded jobs (php artisan queue:work).
+- Keep dependencies updated; run security scans periodically.
 
 ## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+- Fork, create a feature branch, open a PR.
+- Follow existing code style and Tailwind utility patterns.
+- Add tests for backend changes and basic coverage for critical flows.
 
 ## License
+See LICENSE (or add project license here).
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+<!-- End of README -->
