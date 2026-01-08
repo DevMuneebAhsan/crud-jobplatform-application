@@ -16,7 +16,7 @@ class JobSeeder extends Seeder
     public function run(): void
     {
         // 1. Handle Tags: Only create if table is empty
-        if (Tag::count() === 0) {
+        if (Tag::all()->count() === 0) {
             $tags = Tag::factory(4)->create();
         } else {
             // If tags exist, grab them so we can attach them to jobs
@@ -24,7 +24,7 @@ class JobSeeder extends Seeder
         }
 
         // 2. Handle Jobs: Only create if table is empty
-        if (Job::count() === 0) {
+        if (Job::all()->count() === 0) {
             Job::factory(20)
                 ->hasAttached($tags) // Attach the tags we found or created above
                 ->create(new Sequence(
