@@ -18,12 +18,14 @@ class JobController extends Controller
      */
     public function index()
     {
-        $jobs = Job::with(['employer', 'tags'])->latest()->get()->groupBy('feature');
-        $tags = Tag::all();
+        // 1. Get all jobs
+        $jobs = Job::with(['employer', 'tags'])->latest()->get();
+
+        // 2. Filter them manually (This is safe even if the list is empty)
         return view('jobs.index', [
-            'jobs' => $jobs[0],
-            'featuredJobs' => $jobs[1],
-            'tags' => $tags
+            'jobs' => $jobs->where('feature', 0),       // Returns empty collection if none found
+            'featuredJobs' => $jobs->where('feature', 1), // Returns empty collection if none found
+            'tags' => Tag::all()
         ]);
     }
 

@@ -3,6 +3,7 @@
 # 1. Run Migrations (Safe for Postgres - only updates changes)
 echo "Running migrations..."
 php artisan migrate --force
+php artisan db:seed --force
 
 # 2. Optimization/Caching
 echo "Caching configuration..."
